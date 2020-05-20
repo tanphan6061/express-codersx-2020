@@ -1,0 +1,11 @@
+div(style="display:flex")
+  form(action="./todos" style="margin-right:50px")
+    input(type="text" name="q" value=old)
+    input(type="submit" value="Search")
+
+  form(action="./todos/create" method="post")
+    input(type="text" name="todo")
+    input(type="submit" value="Create")
+ul
+  each item in todos
+    li= item
