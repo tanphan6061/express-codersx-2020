@@ -1,0 +1,54 @@
+extends ../layouts/app.pug
+block content 
+  h1 Books management
+  button.btn.btn-primary.mb-3.float-right(type='button', data-toggle='modal', data-target='#myModal') Add
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th Title
+        th Description 
+        th.w-25 Action
+    tbody
+      each book in books
+        tr
+          td.text-capitalize= book.title
+          td= book.description
+          td 
+            button.btn.btn-success(title="edit") 
+              i.material-icons(style='font-size:17px' data-toggle='modal', data-target='#editModal-'+book.id) edit
+            .modal(id="editModal-"+book.id)
+              .modal-dialog.modal-dialog-centered
+                .modal-content
+                  // Modal Header
+                  .modal-header
+                    h4.modal-title Edit book
+                    button.close(type='button', data-dismiss='modal') &times;
+                  // Modal body
+                  .modal-body
+                    form(method="post" action="/books/edit/"+book.id)
+                      .form-group
+                        label(for='title') Title:
+                        input.form-control(id="title" name="title" placeholder="Enter title" value=book.title)
+                      .form-group.my-4
+                        label(for='description') Description:
+                        input.form-control(id="description" name="description" placeholder="Enter description" value=book.description)
+                      button.btn.btn-success.float-right(type='submit') Edit
+            a(href="/books/delete/"+book.id title="delete").btn.btn-danger.ml-2
+              i.material-icons(style='font-size:17px') delete_forever
+  #myModal.modal
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Insert book
+          button.close(type='button', data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form(method="post" action="/books/add")
+            .form-group
+              label(for='title') Title:
+              input.form-control(id="title" name="title" placeholder="Enter title")
+            .form-group.my-4
+              label(for='description') Description:
+              input.form-control(id="description" name="description" placeholder="Enter description")
+            button.btn.btn-primary.float-right(type='submit') Add

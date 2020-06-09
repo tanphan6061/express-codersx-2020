@@ -1,0 +1,54 @@
+extends ../layouts/app.pug
+block content
+  h1 Users management
+  button.btn.btn-primary.mb-3.float-right(type='button', data-toggle='modal', data-target='#myModal') Add
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th Usernmae
+        th Phone number 
+        th.w-25 Action
+    tbody
+      each user in users
+        tr
+          td.text-capitalize= user.username
+          td= user.phone
+          td 
+            button.btn.btn-success(title="edit") 
+              i.material-icons(style='font-size:17px' data-toggle='modal', data-target='#editModal-'+user.id) edit
+            .modal(id="editModal-"+user.id)
+              .modal-dialog.modal-dialog-centered
+                .modal-content
+                  // Modal Header
+                  .modal-header
+                    h4.modal-title Edit user
+                    button.close(type='button', data-dismiss='modal') &times;
+                  // Modal body
+                  .modal-body
+                    form(method="post" action="/users/edit/"+user.id)
+                      .form-group
+                        label(for='username') Username:
+                        input.form-control(id="username" name="username" placeholder="Enter username" value=user.username)
+                      .form-group.my-4
+                        label(for='phone') Phone number:
+                        input.form-control(id="phone" name="phone" placeholder="Enter phone number" value=user.phone)
+                      button.btn.btn-success.float-right(type='submit') Edit
+            a(href="/users/delete/"+user.id title="delete").btn.btn-danger.ml-2
+              i.material-icons(style='font-size:17px') delete_forever
+  #myModal.modal
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        // Modal Header
+        .modal-header
+          h4.modal-title Insert user
+          button.close(type='button', data-dismiss='modal') &times;
+        // Modal body
+        .modal-body
+          form(method="post" action="/users/add")
+            .form-group
+              label(for='username') Username:
+              input.form-control(id="username" name="username" placeholder="Enter username")
+            .form-group.my-4
+              label(for='phone') Phone number:
+              input.form-control(id="phone" name="phone" placeholder="Enter phone number")
+            button.btn.btn-primary.float-right(type='submit') Add
