@@ -1,0 +1,25 @@
+extends ../layouts/app.pug
+block content
+  h1 List of transactions 
+  a(href="/transactions/create").btn.btn-primary.mb-3.float-right Add
+  div.mt-5.f-lex.justify-content-center.align-items-center
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th(style="100px") Stt
+          th.w-50 User 
+          th Book
+          th Status
+      tbody
+        each transaction, index in transactions
+          tr
+            td= index+1
+            td.text-capitalize= transaction.user.username
+            td= transaction.book.title 
+            if transaction.isComplete 
+              td Has been completed 
+            else
+              td
+                a(href="/transactions/"+transaction.id+"/complete") Click to complete
+                
+      

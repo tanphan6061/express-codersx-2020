@@ -4,9 +4,13 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
-const formatStr = require("./functions/format-str"); // search k phân biệt có dấu hay không
-
 const app = express();
+const shortid = require("shortid");
+const db = require("./db");
+
+const userRoutes = require("./routes/user.route");
+const bookRoutes = require("./routes/book.route");
+const transactionRoutes = require("./routes/transaction.route");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -14,31 +18,20 @@ app.set("views", "./views");
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-var todos = ["Đi chợ", "Nấu cơm", "Rửa bát", "Học code tại CodersX"];
+// make all the files in 'public' available
+// https://expressjs.com/en/starter/static-files.html
+app.use(express.static("public"));
+app.use("/users", userRoutes);
+app.use("/books", bookRoutes);
+app.use("/transactions", transactionRoutes);
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
-  response.send("I love CodersX");
-});
-
-app.get("/todos", function(req, res) {
-  let q = req.query.q;
-  let data =
-    !q || q === ""
-      ? todos
-      : todos.filter(i => {
-          return formatStr(i).indexOf(formatStr(q)) > -1;
-        });
-  res.render("index", { todos: data, old: q });
-});
-
-app.post("/todos/create", function(req, res) {
-  let todo = req.body.todo.trim();
-  if (todo !== "") todos.push(req.body.todo);
-  res.redirect("back");
+  // response.sendFile(__dirname + "/views/index.html");
+  response.render('index');
 });
 
 // listen for requests :)
-app.listen(process.env.PORT, () => {
-  console.log("Server listening on port " + process.env.PORT);
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
 });
