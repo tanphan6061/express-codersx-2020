@@ -2,7 +2,7 @@ const shortid = require("shortid");
 const db = require("../db");
 
 module.exports.index = function(req, res) {
-  let transactions = db.get("transactions").value();
+  let transactions = db.get("transactions").filter({idUser: res.locals.user.id}).value();
   let books = db.get("books").value();
 
   transactions.map(i => {
@@ -21,7 +21,8 @@ module.exports.index = function(req, res) {
 };
 
 module.exports.create = function(req, res) {
-  let users = db.get("users").value();
+  let users = db.get("users").filter({id: res.locals.user.id}).value();
+  // let users = res.locals.user;
   let books = db.get("books").value();
   res.render("transactions/create", { users, books });
 };

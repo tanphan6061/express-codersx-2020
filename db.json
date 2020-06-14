@@ -20,12 +20,20 @@
     {
       "id": "615gsRnuK",
       "username": "admin",
-      "phone": "0909123212"
+      "phone": "0909123212",
+      "email": "binzlark@gmail.com",
+      "password": "$2b$10$9awqAJqfTlhshVnJyikTleh9V5bT/c0R7VYc3sicRydxLVxF3LwRm",
+      "isAdmin": true,
+      "wrongLoginCount": 0
     },
     {
       "id": "thv5BYnxF",
       "username": "user1",
-      "phone": "0988241232"
+      "phone": "0988241232",
+      "email": "user1@gmail.com",
+      "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
+      "isAdmin": false,
+      "wrongLoginCount": 0
     }
   ],
   "transactions": [
@@ -37,7 +45,10 @@
       "user": {
         "id": "615gsRnuK",
         "username": "admin",
-        "phone": "0909123212"
+        "phone": "0909123212",
+        "email": "admin@gmail.com",
+        "password": 123123,
+        "isAdmin": true
       },
       "book": {
         "id": "2vsXBp7XyH",
@@ -53,7 +64,10 @@
       "user": {
         "id": "615gsRnuK",
         "username": "admin",
-        "phone": "0909123212"
+        "phone": "0909123212",
+        "email": "admin@gmail.com",
+        "password": "4297f44b13955235245b2497399d7a93",
+        "isAdmin": true
       },
       "book": {
         "id": "E3zn-IuFZ",
@@ -65,16 +79,38 @@
       "id": "sfuhpEJqD",
       "idUser": "thv5BYnxF",
       "idBook": "JcXiqS-rs",
-      "isComplete": false,
+      "isComplete": true,
       "user": {
         "id": "thv5BYnxF",
         "username": "user1",
-        "phone": "0988241232"
+        "phone": "0988241232",
+        "email": "user1@gmail.com",
+        "password": "4297f44b13955235245b2497399d7a93",
+        "isAdmin": false
       },
       "book": {
         "id": "JcXiqS-rs",
         "title": "Đừng bao giờ chơi game một mình",
         "description": "Chơi game phải có anh em mới là niêm vui thật sự :v"
+      }
+    },
+    {
+      "id": "FQfqaRkVe",
+      "idUser": "thv5BYnxF",
+      "idBook": "E3zn-IuFZ",
+      "isComplete": false,
+      "user": {
+        "id": "thv5BYnxF",
+        "username": "user1",
+        "phone": "0988241232",
+        "email": "user1@gmail.com",
+        "password": "4297f44b13955235245b2497399d7a93",
+        "isAdmin": false
+      },
+      "book": {
+        "id": "E3zn-IuFZ",
+        "title": "dạy con chơi game giỏi :v",
+        "description": "con bạn sẽ trở thành top 1 server :D"
       }
     }
   ]
