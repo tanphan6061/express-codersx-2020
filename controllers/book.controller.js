@@ -1,10 +1,24 @@
 const shortid = require("shortid");
 const db = require("../db");
+const pagination = require("../helper/pagination");
 
 module.exports = {
   index(req, res) {
-    let books = db.get("books").value();
-    res.render("books/index", { books });
+    let page = req.query.page || 1;
+    let total = db.get("books").value().length;
+    pagination.init(page, total);
+    let drop = pagination.drop;
+
+    let books = db
+      .get("books")
+      .drop(drop)
+      .take(pagination.perPage)
+      .value();
+
+    res.render("books/index", {
+      books,
+      pagination: pagination.html()
+    });
   },
 
   store(req, res) {
@@ -24,7 +38,7 @@ module.exports = {
       .write();
     res.redirect("back");
   },
-  
+
   update(req, res) {
     let id = req.params.id;
     let { title, description } = req.body;
