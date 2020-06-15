@@ -44,11 +44,16 @@ block content
           button.close(type='button', data-dismiss='modal') &times;
         // Modal body
         .modal-body
-          form(method="post" action="/users/add")
+          form(method="post" action="/users/add" enctype="multipart/form-data")
             .form-group
               label(for='username') Username:
               input.form-control(id="username" name="username" placeholder="Enter username")
             .form-group.my-4
               label(for='phone') Phone number:
               input.form-control(id="phone" name="phone" placeholder="Enter phone number")
+            .form-group.mb-4 
+              label.d-block Avatar
+              input#avatar(type='file', name='avatar')
             button.btn.btn-primary.float-right(type='submit') Add
+            
+  | !{pagination}
