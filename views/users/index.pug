@@ -5,12 +5,15 @@ block content
   table.table.table-striped.table-hover
     thead
       tr
+        th avatar
         th Usernmae
         th Phone number 
         th.w-25 Action
     tbody
       each user in users
         tr
+          td
+            img.avatar.rounded-circle(src=user.avatarUrl ||'https://via.placeholder.com/32' width="32" height="32")
           td.text-capitalize= user.username
           td= user.phone
           td 
@@ -25,13 +28,16 @@ block content
                     button.close(type='button', data-dismiss='modal') &times;
                   // Modal body
                   .modal-body
-                    form(method="post" action="/users/edit/"+user.id)
+                    form(method="post" action="/users/edit/"+user.id enctype="multipart/form-data")
                       .form-group
                         label(for='username') Username:
                         input.form-control(id="username" name="username" placeholder="Enter username" value=user.username)
                       .form-group.my-4
                         label(for='phone') Phone number:
                         input.form-control(id="phone" name="phone" placeholder="Enter phone number" value=user.phone)
+                      .form-group.mb-4 
+                        label.d-block Avatar
+                        input#avatar(type='file', name='avatar')
                       button.btn.btn-success.float-right(type='submit') Edit
             a(href="/users/delete/"+user.id title="delete").btn.btn-danger.ml-2
               i.material-icons(style='font-size:17px') delete_forever

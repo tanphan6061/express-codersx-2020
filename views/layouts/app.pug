@@ -19,10 +19,11 @@ body
         a.btn.btn-light(href="/users") User managements
         if !user.isAdmin
           a.btn.btn-light(href="/transactions") Transaction managements
-      div
+      div.d-flex
         if user
-          div.float-right.text-dark= user.username
+          div.d-flex.align-items-center.text-dark= user.username
         else 
           div= 'hi'
+        a.btn.btn-light(href="/auth/logout") Logout
   .container
     block content

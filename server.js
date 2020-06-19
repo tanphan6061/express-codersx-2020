@@ -14,6 +14,7 @@ const userRoutes = require("./routes/user.route");
 const bookRoutes = require("./routes/book.route");
 const transactionRoutes = require("./routes/transaction.route");
 const authRoutes = require("./routes/auth.route");
+const profileRoutes = require("./routes/profile.route");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -29,6 +30,7 @@ app.use("/users", authMiddleware.requireAuth, userRoutes);
 app.use("/books", authMiddleware.requireAuth, bookRoutes);
 app.use("/transactions", authMiddleware.requireAuth, transactionRoutes);
 app.use("/auth", authRoutes);
+app.use('/profile', authMiddleware.requireAuth, profileRoutes);
 
 
 // const bcrypt = require('bcrypt');
@@ -37,7 +39,7 @@ app.use("/auth", authRoutes);
 // });
 
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/", authMiddleware.requireAuth , (req, res) => {
+app.get("/", authMiddleware.requireAuth, (req, res) => {
   // response.sendFile(__dirname + "/views/index.html");
 
   if (req.cookies.count) {

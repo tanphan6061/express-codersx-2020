@@ -509,7 +509,8 @@
       "email": "binzlark@gmail.com",
       "password": "$2b$10$9awqAJqfTlhshVnJyikTleh9V5bT/c0R7VYc3sicRydxLVxF3LwRm",
       "isAdmin": true,
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592564944/app/negks103qw5tyfxblndc.jpg"
     },
     {
       "id": "thv5BYnxF",
@@ -526,7 +527,8 @@
       "email": "fciepluch0@patch.com",
       "phone": "636-857-0916",
       "isAdmin": "false",
-      "wrongLoginCount": 1
+      "wrongLoginCount": 1,
+      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592249623/app/veje60pbtslnsrniqxm9.jpg"
     },
     {
       "id": "97b6d8ad-67fb-4d39-9c19-37535e3cc682",
@@ -534,7 +536,8 @@
       "email": "bhallewell1@angelfire.com",
       "phone": "531-205-9707",
       "isAdmin": "false",
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatarUrl": ""
     },
     {
       "id": "53f5aedb-1018-461e-a289-9e6eff7632dc",
@@ -542,7 +545,8 @@
       "email": "mivain2@sina.com.cn",
       "phone": "574-335-6881",
       "isAdmin": "false",
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatarUrl": ""
     },
     {
       "id": "5a9fa4a3-d010-4a0a-b99d-df906ef275d6",
@@ -1301,14 +1305,6 @@
       "username": "colanda2p",
       "email": "cvicar2p@ebay.co.uk",
       "phone": "920-523-0851",
-      "isAdmin": "false",
-      "wrongLoginCount": 0
-    },
-    {
-      "id": "b5a5a893-c680-4126-ab5e-6ef734013bb4",
-      "username": "ddorian2q",
-      "email": "rdarch2q@posterous.com",
-      "phone": "836-958-4469",
       "isAdmin": "false",
       "wrongLoginCount": 0
     },

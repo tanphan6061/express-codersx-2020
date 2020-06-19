@@ -7,6 +7,11 @@ module.exports.login = function(req, res) {
   res.render("auth/login");
 };
 
+module.exports.logout = function(req,res){
+  res.clearCookie("userId");
+  res.redirect('/');
+}
+
 module.exports.postLogin = function(req, res) {
   let { email, password } = req.body;
   let user = db
