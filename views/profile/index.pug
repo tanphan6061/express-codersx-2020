@@ -1,0 +1,11 @@
+extends ../layouts/app.pug
+block content
+    h1="Pofile of " + user.username
+    div
+        img.avatar(src=user.avatarUrl)
+        div.my-3.d-flex.justify-content-center(style="width:400px")
+            span.mr-3="Avatar"
+            a(href="/profile/avatar").btn.btn-primary="edit"
+    div="User name: " + user.username
+    div.my-1="Email: " + user.email
+    div="Phone number: " + user.phone
