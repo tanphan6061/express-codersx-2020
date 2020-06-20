@@ -3,16 +3,16 @@ const bcrypt = require("bcrypt");
 const db = require("../db");
 const mail = require("../mail");
 
-module.exports.login = function(req, res) {
+module.exports.login = function (req, res) {
   res.render("auth/login");
 };
 
-module.exports.logout = function(req,res){
+module.exports.logout = function (req, res) {
   res.clearCookie("userId");
-  res.redirect('/');
+  res.redirect('back');
 }
 
-module.exports.postLogin = function(req, res) {
+module.exports.postLogin = function (req, res) {
   let { email, password } = req.body;
   let user = db
     .get("users")
@@ -69,7 +69,10 @@ module.exports.postLogin = function(req, res) {
       .write();
 
     res.cookie("userId", user.id, { signed: true });
-    res.redirect("/");
+
+    let directTo = req.cookies.directTo || '/';
+    console.log("page login   " + directTo);
+    res.redirect(directTo);
   });
 
   // if (user.password != md5(password)) {

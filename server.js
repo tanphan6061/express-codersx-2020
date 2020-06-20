@@ -9,19 +9,23 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const authMiddleware = require('./middlewares/auth.middleware');
+const sessionMiddleware = require('./middlewares/session.middleware');
 
 const userRoutes = require("./routes/user.route");
 const bookRoutes = require("./routes/book.route");
 const transactionRoutes = require("./routes/transaction.route");
 const authRoutes = require("./routes/auth.route");
 const profileRoutes = require("./routes/profile.route");
+const cartRoutes = require("./routes/cart.route");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
+
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(cookieParser('pvtkynz'));
+app.use(cookieParser(process.env.SESSION_SCRET));
+app.use(sessionMiddleware);
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
@@ -31,6 +35,7 @@ app.use("/books", authMiddleware.requireAuth, bookRoutes);
 app.use("/transactions", authMiddleware.requireAuth, transactionRoutes);
 app.use("/auth", authRoutes);
 app.use('/profile', authMiddleware.requireAuth, profileRoutes);
+app.use('/cart', cartRoutes);
 
 
 // const bcrypt = require('bcrypt');

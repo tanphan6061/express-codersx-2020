@@ -1,6 +1,6 @@
 doctype html
 head
-  title Bootstrap Example
+  title Book Managements
   meta(charset='utf-8')
   meta(name='viewport', content='width=device-width, initial-scale=1')
   link(rel='icon', href='https://cdn.glitch.com/63b16a56-3409-4513-9e15-a61692e798be%2F4800images.ico?v=1591252771636', type='image/gif', sizes='64x64')
@@ -13,17 +13,19 @@ head
 body
   header.bg-light.border.mb-3
     .container.p-1.text-white.d-flex.align-items-center.justify-content-between
-      div
+      div.d-flex.align-items-center.justify-content-center
         a.btn.btn-light(href="/") Home
-        a.btn.btn-light(href="/books") Book managements
-        a.btn.btn-light(href="/users") User managements
-        if !user.isAdmin
-          a.btn.btn-light(href="/transactions") Transaction managements
+        a.btn.btn-light(href="/books") Books
+        a.btn.btn-light(href="/users") Users
+        if user&&!user.isAdmin
+          a.btn.btn-light(href="/transactions") Transactions
+        div.text-dark.ml-2.d-flex.align-items-center
+          i(style="font-size:18px").material-icons shopping_cart
+          sup.text-danger= cart.total
       div.d-flex
         if user
           div.d-flex.align-items-center.text-dark= user.username
-        else 
-          div= 'hi'
-        a.btn.btn-light(href="/auth/logout") Logout
+          a.btn.btn-light(href="/auth/logout") Logout
+        
   .container
     block content

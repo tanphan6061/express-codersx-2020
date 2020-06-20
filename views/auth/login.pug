@@ -1,20 +1,20 @@
-head 
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
-.border.rounded.bg-white.p-5.m-5
-  // 
-  .col-8.offset-2.mt-4
-    .card.row.border-primary
-      .card-header.text-white.bg-primary Login
-      .card-body
-        if errors
-          each error in errors
-            .error.m-2
-              .alert.alert-danger= error
-        form(method='post')
-          .form-group.row.mt-4
-            label.col-3.offset-1(for='email') Email
-            input#email.col-7.form-control(type='email', name='email', placeholder='Enter your email', value=old ? old.email : '' , autofocus='autofocus')
-          .form-group.row.mt-4
-            label.col-3.offset-1(for='password') Password
-            input#password.col-7.form-control(type='password', name='password', placeholder='Enter your password' value=old ? old.password : '')
-          button#login.btn-primary.offset-4.btn.w-25.mt-4 Login
+extends ../layouts/app.pug
+block content 
+    // 
+    div.pt-5
+      .col-8.offset-2.mt-5
+        .card.row.border-primary
+          .card-header.text-white.bg-primary Login
+          .card-body
+            if errors
+              each error in errors
+                .error.m-2
+                  .alert.alert-danger= error
+            form(method='post')
+              .form-group.row.mt-4
+                label.col-3.offset-1(for='email') Email
+                input#email.col-7.form-control(type='email', name='email', placeholder='Enter your email', value=old ? old.email : '' , autofocus='autofocus')
+              .form-group.row.mt-4
+                label.col-3.offset-1(for='password') Password
+                input#password.col-7.form-control(type='password', name='password', placeholder='Enter your password' value=old ? old.password : '')
+              button#login.btn-primary.offset-4.btn.w-25.mt-4 Login

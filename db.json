@@ -510,7 +510,7 @@
       "password": "$2b$10$9awqAJqfTlhshVnJyikTleh9V5bT/c0R7VYc3sicRydxLVxF3LwRm",
       "isAdmin": true,
       "wrongLoginCount": 0,
-      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592564944/app/negks103qw5tyfxblndc.jpg"
+      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592642367/book-managements/avatar/t3nhiokjaudkqkcnnf5x.jpg"
     },
     {
       "id": "thv5BYnxF",
@@ -519,7 +519,8 @@
       "email": "user1@gmail.com",
       "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
       "isAdmin": false,
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592654890/book-managements/avatar/ypftlgm3orppv63qkiai.jpg"
     },
     {
       "id": "7656c959-c075-41a7-b648-8e80592b23c9",
@@ -1319,124 +1320,63 @@
   ],
   "transactions": [
     {
-      "id": "4sofNEzmg",
+      "id": "JswmDSv9C",
       "idUser": "thv5BYnxF",
-      "idBook": "95cc5832-2922-4b17-8512-86852b21ca95",
-      "isComplete": false,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "95cc5832-2922-4b17-8512-86852b21ca95",
-        "title": "Otomegusa Dashi Konbu",
-        "description": "sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non"
+      "idBook": "20b2b6e6-35e1-4124-814f-15fb26566bf0",
+      "amount": 2,
+      "isComplete": false
+    },
+    {
+      "id": "UCg4qoaZHq",
+      "idUser": "thv5BYnxF",
+      "idBook": "66caf6a7-1a5a-4979-a6d5-66aded0f1055",
+      "amount": 1,
+      "isComplete": false
+    },
+    {
+      "id": "5hbAC66L4",
+      "idUser": "thv5BYnxF",
+      "idBook": "20b2b6e6-35e1-4124-814f-15fb26566bf0",
+      "amount": 1,
+      "isComplete": false
+    },
+    {
+      "id": "4Hl2QFEje8",
+      "idUser": "thv5BYnxF",
+      "idBook": "66caf6a7-1a5a-4979-a6d5-66aded0f1055",
+      "amount": 1,
+      "isComplete": false
+    }
+  ],
+  "sessions": [
+    {
+      "id": "02ejNLQAX"
+    },
+    {
+      "id": "KWVKhBDi4"
+    },
+    {
+      "id": "iSslEwar6"
+    },
+    {
+      "id": "EAE9MrYPG",
+      "cart": {
+        "20b2b6e6-35e1-4124-814f-15fb26566bf0": 1,
+        "66caf6a7-1a5a-4979-a6d5-66aded0f1055": 1,
+        "ffd644c1-e043-465f-ad82-d7c07862e73c": 1,
+        "118ebf32-d250-46e7-a256-1e605bee03a2": 1,
+        "b6764397-8e30-4322-8cc5-f81a2da6937f": 1
       }
     },
     {
-      "id": "xe9roNMlX",
-      "idUser": "thv5BYnxF",
-      "idBook": "b824fd15-09bc-4aa4-a8d3-b5590fffd132",
-      "isComplete": true,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "b824fd15-09bc-4aa4-a8d3-b5590fffd132",
-        "title": "Bread - Burger",
-        "description": "rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam"
+      "id": "Mi1c5hxir",
+      "cart": {
+        "20b2b6e6-35e1-4124-814f-15fb26566bf0": 1
       }
     },
     {
-      "id": "Q3d4_sJAB",
-      "idUser": "thv5BYnxF",
-      "idBook": "7644afad-f822-4905-85e7-13e2283a2061",
-      "isComplete": true,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "7644afad-f822-4905-85e7-13e2283a2061",
-        "title": "Muffin - Mix - Creme Brule 15l",
-        "description": "et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque"
-      }
-    },
-    {
-      "id": "P3gckV05I",
-      "idUser": "thv5BYnxF",
-      "idBook": "d8fc51f7-245d-4c9f-a39d-f14e48e6a8d2",
-      "isComplete": false,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "d8fc51f7-245d-4c9f-a39d-f14e48e6a8d2",
-        "title": "Cheese Cloth",
-        "description": "ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum"
-      }
-    },
-    {
-      "id": "6kG_3lsz2",
-      "idUser": "thv5BYnxF",
-      "idBook": "d8fc51f7-245d-4c9f-a39d-f14e48e6a8d2",
-      "isComplete": false,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "d8fc51f7-245d-4c9f-a39d-f14e48e6a8d2",
-        "title": "Cheese Cloth",
-        "description": "ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum"
-      }
-    },
-    {
-      "id": "cXi5s3yEI",
-      "idUser": "thv5BYnxF",
-      "idBook": "83464b83-b3a6-415c-b790-c35b97cb8ed6",
-      "isComplete": false,
-      "user": {
-        "id": "thv5BYnxF",
-        "username": "user1",
-        "phone": "0988241232",
-        "email": "user1@gmail.com",
-        "password": "$2b$10$lvUvYmw5wilOeADDLElYr.phcGKu7xtzpA91reImVfW1g5rCkK3Kq",
-        "isAdmin": false,
-        "wrongLoginCount": 0
-      },
-      "book": {
-        "id": "83464b83-b3a6-415c-b790-c35b97cb8ed6",
-        "title": "Beets - Mini Golden",
-        "description": "proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus"
-      }
+      "id": "AjJ9aKw1M",
+      "cart": {}
     }
   ]
 }

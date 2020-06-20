@@ -13,4 +13,7 @@ block content
         select.custom-select(name='idBook')
           each book in books
             option(value= book.id)= book.title
+      .form-group.mb-4
+        label(for='amount') Amount:
+        input.form-control(name='amount' type="number" value="1" min="1")
       button.btn.btn-primary.float-right(type='submit') Create

@@ -2,7 +2,7 @@ const shortid = require("shortid");
 const db = require("../db");
 const pagination = require("../helper/pagination");
 
-module.exports.index = function(req, res) {
+module.exports.index = function (req, res) {
   let page = req.query.page || 1;
   let total = db
     .get("transactions")
@@ -15,9 +15,9 @@ module.exports.index = function(req, res) {
     .filter({ idUser: res.locals.user.id })
     .drop(pagination.drop)
     .take(pagination.perPage)
+    .cloneDeep()
     .value();
-  
-  console.log(transactions);
+
   let books = db.get("books").value();
 
   transactions.map(i => {
@@ -38,7 +38,7 @@ module.exports.index = function(req, res) {
   });
 };
 
-module.exports.create = function(req, res) {
+module.exports.create = function (req, res) {
   let users = db
     .get("users")
     .filter({ id: res.locals.user.id })
@@ -48,15 +48,17 @@ module.exports.create = function(req, res) {
   res.render("transactions/create", { users, books });
 };
 
-module.exports.store = function(req, res) {
-  let { idUser, idBook } = req.body;
+module.exports.store = function (req, res) {
+  let { idUser, idBook, amount } = req.body;
+  if (amount < 1)
+    amount = 1;
   db.get("transactions")
-    .push({ id: shortid.generate(), idUser, idBook, isComplete: false })
+    .push({ id: shortid.generate(), idUser, idBook, amount, isComplete: false })
     .write();
   res.redirect("/transactions");
 };
 
-module.exports.update = function(req, res) {
+module.exports.update = function (req, res) {
   let id = req.params.id;
   db.get("transactions")
     .find({ id })
@@ -64,3 +66,27 @@ module.exports.update = function(req, res) {
     .write();
   res.redirect("back");
 };
+
+module.exports.rentBook = function (req, res) {
+  let sessionId = res.locals.cart.id;
+
+  let cart = db
+    .get('sessions')
+    .find({
+      id: sessionId
+    })
+    .cloneDeep()
+    .value().cart;
+
+  for (idBook in cart) {
+    db.get("transactions")
+      .push({ id: shortid.generate(), idUser: res.locals.user.id, idBook, amount: cart[idBook], isComplete: false })
+      .write();
+  }
+
+  db.get('sessions')
+    .find({ id: sessionId })
+    .assign({ cart: {} })
+    .write();
+  res.redirect('/transactions')
+}

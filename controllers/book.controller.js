@@ -23,9 +23,11 @@ module.exports = {
 
   store(req, res) {
     let { title, description } = req.body;
-    if (title != "") {
+    let coverUrl = req.file ? req.file.path : '';
+    console.log(title);
+    if (title) {
       db.get("books")
-        .push({ id: shortid.generate(), title, description })
+        .push({ id: shortid.generate(), title, description, coverUrl })
         .write();
     }
     res.redirect("back");
@@ -42,10 +44,17 @@ module.exports = {
   update(req, res) {
     let id = req.params.id;
     let { title, description } = req.body;
+    let data = {
+      title, description
+    }
+    if (req.file) {
+      data.coverUrl = req.file.path;
+    }
+
     if (title != "") {
       db.get("books")
         .find({ id })
-        .assign({ title, description })
+        .assign(data)
         .write();
     }
     res.redirect("back");

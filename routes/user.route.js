@@ -1,9 +1,10 @@
-const storage = require("../helper/cloudinary");
+const cloudinary = require("../helper/cloudinary");
 const multer = require("multer");
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/user.controller");
 
+const storage = cloudinary('avatar');
 const upload = multer({ storage });
 
 router.get("/", controller.index);

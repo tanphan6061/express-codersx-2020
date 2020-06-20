@@ -7,8 +7,9 @@ block content
       thead
         tr
           th(style="100px") Stt
-          th.w-50 User 
+          th User 
           th Book
+          th Amount
           th Status
       tbody
         each transaction, index in transactions
@@ -16,6 +17,7 @@ block content
             td= index+1
             td.text-capitalize= transaction.user.username
             td= transaction.book.title 
+            td= transaction.amount
             if transaction.isComplete 
               td Has been completed 
             else

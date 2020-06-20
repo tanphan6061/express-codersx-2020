@@ -23,6 +23,7 @@ module.exports = {
     }
 
     if (this.totalPage < this.limit) {
+      this.startPage = 1;
       this.endPage = this.totalPage;
     }
 
