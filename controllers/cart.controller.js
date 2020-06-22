@@ -1,9 +1,10 @@
 const db = require('../db');
-module.exports.addToCart = function (req, res, next) {
+const Book = require('../models/book.model');
+module.exports.addToCart = async function (req, res, next) {
     let bookId = req.params.bookId;
     let sessionId = req.signedCookies.sessionId;
 
-    let book = db.get('books').find({ id: bookId }).value();
+    let book = await Book.findById(bookId);
     if (!book && sessionId) {
         res.redirect('/books');
     }

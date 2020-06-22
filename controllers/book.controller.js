@@ -1,56 +1,39 @@
 const shortid = require("shortid");
-const db = require("../db");
 const pagination = require("../helper/pagination");
 const Book = require('../models/book.model');
 
 module.exports = {
   async index(req, res) {
-
     let page = req.query.page || 1;
-    let total = db.get("books").value().length;
+    let total = await Book.countDocuments();
     pagination.init(page, total);
-    let drop = pagination.drop;
-
-    let books = db
-      .get("books")
-      .drop(drop)
-      .take(pagination.perPage)
-      .value();
+    let books = await Book.find().limit(pagination.perPage).skip(pagination.drop);
 
     res.render("books/index", {
       books,
       pagination: pagination.html(),
       csrf: req.csrfToken()
     });
-    // let books = await Book.find();
-    // res.render("books/index", {
-    //   books,
-    //   pagination: ''
-    // });
   },
 
-  store(req, res) {
+  async store(req, res) {
     let { title, description } = req.body;
     let coverUrl = req.file ? req.file.path : '';
 
     if (title) {
-      db.get("books")
-        .push({ id: shortid.generate(), title, description, coverUrl })
-        .write();
+      await Book.create({ id: shortid.generate(), title, description, coverUrl })
     }
     res.redirect("back");
   },
 
-  destroy(req, res) {
-    let id = req.params.id;
-    db.get("books")
-      .remove({ id })
-      .write();
+  async destroy(req, res) {
+    let _id = req.params.id;
+    await Book.deleteOne({ _id });
     res.redirect("back");
   },
 
-  update(req, res) {
-    let id = req.params.id;
+  async update(req, res) {
+    let _id = req.params.id;
     let { title, description } = req.body;
     let data = {
       title, description
@@ -60,10 +43,7 @@ module.exports = {
     }
 
     if (title != "") {
-      db.get("books")
-        .find({ id })
-        .assign(data)
-        .write();
+      await Book.findOneAndUpdate({ _id}, data);
     }
     res.redirect("back");
   }

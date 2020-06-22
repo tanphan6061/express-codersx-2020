@@ -1,52 +1,40 @@
-const shortid = require("shortid");
-const db = require("../db");
+const User = require('../models/user.model');
 const pagination = require("../helper/pagination");
 
-
-module.exports.index = function (req, res) {
+module.exports.index = async function (req, res) {
   let page = req.query.page || 1;
-  let total = db.get("users").value().length;
+  let total = await User.countDocuments() - 1;
   pagination.init(page, total);
-
-  let users = db
-    .get("users")
-    .drop(pagination.drop)
-    .take(pagination.perPage)
-    .value();
+  // console.log(await User.find({_id:{'$ne': res.locals.user.id}}).count(true))
+  let users = await User.find({_id:{$ne: res.locals.user.id}}).limit(pagination.perPage).skip(pagination.drop);
   res.render("users/index", { users, pagination: pagination.html(), csrf: req.csrfToken() });
-  // res.render("users/index", { users, pagination: pagination.html() });
 };
 
-module.exports.store = function (req, res) {
+module.exports.store = async function (req, res) {
   let { username, phone } = req.body;
   let isAdmin = false;
   let wrongLoginCount = 0;
 
   let avatarUrl = req.file ? req.file.path : '';
   if (username != "" && username.length <= 30) {
-    db.get("users")
-      .push({
-        id: shortid.generate(),
-        username,
-        phone,
-        isAdmin,
-        wrongLoginCount,
-        avatarUrl
-      })
-      .write();
+    await User.create({
+      username,
+      phone,
+      isAdmin,
+      wrongLoginCount,
+      avatarUrl
+    })
   }
   res.redirect("back");
 };
 
-module.exports.destroy = function (req, res) {
-  let id = req.params.id;
-  db.get("users")
-    .remove({ id })
-    .write();
+module.exports.destroy = async function (req, res) {
+  let _id = req.params.id;
+  await User.deleteOne({ _id })
   res.redirect("back");
 };
 
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
   let id = req.params.id;
   let { username, phone } = req.body;
   let data = {
@@ -57,10 +45,7 @@ module.exports.update = function (req, res) {
     data.avatarUrl = avatarUrl;
   }
   if (username != "") {
-    db.get("users")
-      .find({ id })
-      .assign(data)
-      .write();
+    await User.findByIdAndUpdate(id, data);
   }
   res.redirect("back");
 };

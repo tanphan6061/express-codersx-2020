@@ -1,8 +1,10 @@
 const shortid = require("shortid");
 const db = require("../db");
+const User = require('../models/user.model');
+const Book = require('../models/book.model');
 const pagination = require("../helper/pagination");
 
-module.exports.index = function (req, res) {
+module.exports.index = async function (req, res) {
   let page = req.query.page || 1;
   let total = db
     .get("transactions")
@@ -18,19 +20,16 @@ module.exports.index = function (req, res) {
     .cloneDeep()
     .value();
 
-  let books = db.get("books").value();
+  // transactions.map(async i => {
+  //   i.user = await User.findById(i.idUser)
+  //   i.book = await Book.findById(i.idBook)
+  //   return i;
+  // })
 
-  transactions.map(i => {
-    i.user = db
-      .get("users")
-      .find({ id: i.idUser })
-      .value();
-    i.book = db
-      .get("books")
-      .find({ id: i.idBook })
-      .value();
-    return i;
-  });
+  for (let i of transactions) {
+    i.user = await User.findById(i.idUser)
+    i.book = await Book.findById(i.idBook)
+  }
 
   res.render("transactions/index", {
     transactions,
@@ -38,13 +37,9 @@ module.exports.index = function (req, res) {
   });
 };
 
-module.exports.create = function (req, res) {
-  let users = db
-    .get("users")
-    .filter({ id: res.locals.user.id })
-    .value();
-  // let users = res.locals.user;
-  let books = db.get("books").value();
+module.exports.create = async function (req, res) {
+  let users = await User.find({ _id: res.locals.user.id });
+  let books = await Book.find();
   res.render("transactions/create", { users, books, csrf: req.csrfToken() });
 };
 

@@ -1,21 +1,17 @@
-const db = require("../db");
+const User = require('../models/user.model')
 module.exports.index = function (req, res) {
     res.render('profile/index')
 };
 
 module.exports.edit = function (req, res) {
-    res.render('profile/edit',{
+    res.render('profile/edit', {
         csrf: req.csrfToken()
     });
-    // res.render('profile/edit');
 }
 
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
     if (req.file) {
-        db.get("users")
-        .find({ id: res.locals.user.id })
-        .assign({avatarUrl : req.file.path})
-        .write();
+        await User.findOneAndUpdate({ _id: res.locals.user.id }, { avatarUrl: req.file.path });
     }
     res.redirect('/profile');
 }

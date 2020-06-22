@@ -1361,6 +1361,48 @@
       "idBook": "b824fd15-09bc-4aa4-a8d3-b5590fffd132",
       "amount": "1",
       "isComplete": false
+    },
+    {
+      "id": "I8mlx_W-a",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa5120a3d3c19c8a551bf",
+      "amount": 1,
+      "isComplete": false
+    },
+    {
+      "id": "8Qyrg5HOBe",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa58fb149d92e0c5c60f3",
+      "amount": 1,
+      "isComplete": false
+    },
+    {
+      "id": "R47c-Qpy_T",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa58fb149d92e0c5c60f4",
+      "amount": 1,
+      "isComplete": true
+    },
+    {
+      "id": "y8WabzrwH",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa5120a3d3c19c8a551bf",
+      "amount": 2,
+      "isComplete": true
+    },
+    {
+      "id": "W9cFrVlkE",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa58fb149d92e0c5c614b",
+      "amount": "1",
+      "isComplete": false
+    },
+    {
+      "id": "eli4XnvSN",
+      "idUser": "5ef0c5b70cdd863c48c23014",
+      "idBook": "5eefa5120a3d3c19c8a551bf",
+      "amount": 9,
+      "isComplete": false
     }
   ],
   "sessions": [
@@ -1394,7 +1436,8 @@
       "cart": {}
     },
     {
-      "id": "b4RJBsZsr"
+      "id": "b4RJBsZsr",
+      "cart": {}
     }
   ]
 }

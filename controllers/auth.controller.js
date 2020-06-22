@@ -1,10 +1,9 @@
-// const md5 = require("md5");
 const bcrypt = require("bcrypt");
-const db = require("../db");
+const User = require('../models/user.model');
 const mail = require("../mail");
 
 module.exports.login = function (req, res) {
-  res.render("auth/login",{
+  res.render("auth/login", {
     csrf: req.csrfToken()
   });
 };
@@ -14,33 +13,28 @@ module.exports.logout = function (req, res) {
   res.redirect('back');
 }
 
-module.exports.postLogin = function (req, res) {
+module.exports.postLogin = async function (req, res) {
   let { email, password } = req.body;
-  let user = db
-    .get("users")
-    .find({ email })
-    .value();
+  let user = await User.findOne({ email });
 
   if (!user) {
     return res.render("auth/login", {
       errors: ["email is not exist"],
-      old: req.body
+      old: req.body,
+      csrf: req.csrfToken()
     });
   }
 
   if (user.wrongLoginCount >= 4)
     return res.render("auth/login", {
       errors: ["You entered the wrong password too many times"],
-      old: req.body
+      old: req.body,
+      csrf: req.csrfToken()
     });
 
-  bcrypt.compare(password, user.password).then(success => {
+  bcrypt.compare(password, user.password).then(async success => {
     if (!success) {
-      db.get("users")
-        .find({ id: user.id })
-        .assign({ wrongLoginCount: user.wrongLoginCount + 1 })
-        .write();
-
+      user = await User.findOneAndUpdate({ _id: user.id }, { wrongLoginCount: user.wrongLoginCount + 1 },{new:true});
       let err = "You entered the wrong password too many times";
 
       if (user.wrongLoginCount < 4) {
@@ -61,25 +55,15 @@ module.exports.postLogin = function (req, res) {
 
       return res.render("auth/login", {
         errors: [err],
-        old: req.body
+        old: req.body,
+        csrf: req.csrfToken()
       });
     }
 
-    db.get("users")
-      .find({ id: user.id })
-      .assign({ wrongLoginCount: 0 })
-      .write();
-
+    await User.findOneAndUpdate({ _id: user.id }, { wrongLoginCount: 0 });
     res.cookie("userId", user.id, { signed: true });
 
     let directTo = req.cookies.directTo || '/';
     res.redirect(directTo);
   });
-
-  // if (user.password != md5(password)) {
-  //   return res.render("auth/login", {
-  //     errors: ["incorrect password"],
-  //     old: req.body
-  //   });
-  // }
 };

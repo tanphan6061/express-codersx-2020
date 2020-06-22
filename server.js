@@ -9,9 +9,8 @@ const cookieParser = require("cookie-parser");
 // const csrf = require('csurf');
 const app = express();
 
-
-// const mongoose = require('mongoose');
-// mongoose.connect(process.env.MongoDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MongoDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const authMiddleware = require('./middlewares/auth.middleware');
 const sessionMiddleware = require('./middlewares/session.middleware');
@@ -25,7 +24,6 @@ const cartRoutes = require("./routes/cart.route");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
-
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
