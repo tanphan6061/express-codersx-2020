@@ -4,7 +4,10 @@ module.exports.index = function (req, res) {
 };
 
 module.exports.edit = function (req, res) {
-    res.render('profile/edit');
+    res.render('profile/edit',{
+        csrf: req.csrfToken()
+    });
+    // res.render('profile/edit');
 }
 
 module.exports.update = function (req, res) {

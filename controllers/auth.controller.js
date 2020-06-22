@@ -4,7 +4,9 @@ const db = require("../db");
 const mail = require("../mail");
 
 module.exports.login = function (req, res) {
-  res.render("auth/login");
+  res.render("auth/login",{
+    csrf: req.csrfToken()
+  });
 };
 
 module.exports.logout = function (req, res) {
@@ -71,7 +73,6 @@ module.exports.postLogin = function (req, res) {
     res.cookie("userId", user.id, { signed: true });
 
     let directTo = req.cookies.directTo || '/';
-    console.log("page login   " + directTo);
     res.redirect(directTo);
   });
 

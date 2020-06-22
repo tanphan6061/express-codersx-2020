@@ -1,9 +1,11 @@
 const shortid = require("shortid");
 const db = require("../db");
 const pagination = require("../helper/pagination");
+const Book = require('../models/book.model');
 
 module.exports = {
-  index(req, res) {
+  async index(req, res) {
+
     let page = req.query.page || 1;
     let total = db.get("books").value().length;
     pagination.init(page, total);
@@ -17,14 +19,20 @@ module.exports = {
 
     res.render("books/index", {
       books,
-      pagination: pagination.html()
+      pagination: pagination.html(),
+      csrf: req.csrfToken()
     });
+    // let books = await Book.find();
+    // res.render("books/index", {
+    //   books,
+    //   pagination: ''
+    // });
   },
 
   store(req, res) {
     let { title, description } = req.body;
     let coverUrl = req.file ? req.file.path : '';
-    console.log(title);
+
     if (title) {
       db.get("books")
         .push({ id: shortid.generate(), title, description, coverUrl })

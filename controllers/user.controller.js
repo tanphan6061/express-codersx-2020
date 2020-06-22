@@ -13,7 +13,8 @@ module.exports.index = function (req, res) {
     .drop(pagination.drop)
     .take(pagination.perPage)
     .value();
-  res.render("users/index", { users, pagination: pagination.html() });
+  res.render("users/index", { users, pagination: pagination.html(), csrf: req.csrfToken() });
+  // res.render("users/index", { users, pagination: pagination.html() });
 };
 
 module.exports.store = function (req, res) {

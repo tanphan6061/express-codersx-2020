@@ -3,6 +3,7 @@ block content
   h1 Add transaction
   div.mt-5.f-lex.justify-content-center.align-items-center
     form(method="post")
+      input(type="hidden" name="_csrf" value=csrf)
       .form-group
         label(for='title') User:
         select.custom-select(name='idUser')

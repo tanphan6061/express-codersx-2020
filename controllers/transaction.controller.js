@@ -45,7 +45,7 @@ module.exports.create = function (req, res) {
     .value();
   // let users = res.locals.user;
   let books = db.get("books").value();
-  res.render("transactions/create", { users, books });
+  res.render("transactions/create", { users, books, csrf: req.csrfToken() });
 };
 
 module.exports.store = function (req, res) {

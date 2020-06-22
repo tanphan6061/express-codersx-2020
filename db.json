@@ -3,11 +3,12 @@
     {
       "id": "20b2b6e6-35e1-4124-814f-15fb26566bf0",
       "title": "Mushroom - Trumpet, Dry",
-      "description": "a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut"
+      "description": "a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut",
+      "coverUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592759149/book-managements/book-cover/xx2i4xatbw0gcny6zycd.jpg"
     },
     {
       "id": "66caf6a7-1a5a-4979-a6d5-66aded0f1055",
-      "title": "Milk Powder",
+      "title": "Milk Powderi",
       "description": "libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a"
     },
     {
@@ -510,7 +511,7 @@
       "password": "$2b$10$9awqAJqfTlhshVnJyikTleh9V5bT/c0R7VYc3sicRydxLVxF3LwRm",
       "isAdmin": true,
       "wrongLoginCount": 0,
-      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592642367/book-managements/avatar/t3nhiokjaudkqkcnnf5x.jpg"
+      "avatarUrl": "https://res.cloudinary.com/binzlark/image/upload/v1592831742/book-managements/avatar/nqel1b1hiczqfvloaxm3.jpg"
     },
     {
       "id": "thv5BYnxF",
@@ -1346,6 +1347,20 @@
       "idBook": "66caf6a7-1a5a-4979-a6d5-66aded0f1055",
       "amount": 1,
       "isComplete": false
+    },
+    {
+      "id": "8GQ3dS_f5",
+      "idUser": "thv5BYnxF",
+      "idBook": "b824fd15-09bc-4aa4-a8d3-b5590fffd132",
+      "amount": "1",
+      "isComplete": false
+    },
+    {
+      "id": "E-VAk--Xh",
+      "idUser": "thv5BYnxF",
+      "idBook": "b824fd15-09bc-4aa4-a8d3-b5590fffd132",
+      "amount": "1",
+      "isComplete": false
     }
   ],
   "sessions": [
@@ -1377,6 +1392,9 @@
     {
       "id": "AjJ9aKw1M",
       "cart": {}
+    },
+    {
+      "id": "b4RJBsZsr"
     }
   ]
 }

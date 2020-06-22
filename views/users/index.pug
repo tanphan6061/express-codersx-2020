@@ -29,6 +29,7 @@ block content
                   // Modal body
                   .modal-body
                     form(method="post" action="/users/edit/"+user.id enctype="multipart/form-data")
+                      input(type="hidden" name="_csrf" value=csrf)
                       .form-group
                         label(for='username') Username:
                         input.form-control(id="username" name="username" placeholder="Enter username" value=user.username)
@@ -51,6 +52,7 @@ block content
         // Modal body
         .modal-body
           form(method="post" action="/users/add" enctype="multipart/form-data")
+            input(type="hidden" name="_csrf" value=csrf)
             .form-group
               label(for='username') Username:
               input.form-control(id="username" name="username" placeholder="Enter username")

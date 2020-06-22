@@ -11,6 +11,7 @@ block content
                 .error.m-2
                   .alert.alert-danger= error
             form(method='post')
+              input(type="hidden" name="_csrf" value=csrf)
               .form-group.row.mt-4
                 label.col-3.offset-1(for='email') Email
                 input#email.col-7.form-control(type='email', name='email', placeholder='Enter your email', value=old ? old.email : '' , autofocus='autofocus')

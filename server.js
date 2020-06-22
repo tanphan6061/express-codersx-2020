@@ -6,7 +6,12 @@
 require('dotenv').config()
 const express = require("express");
 const cookieParser = require("cookie-parser");
+// const csrf = require('csurf');
 const app = express();
+
+
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MongoDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const authMiddleware = require('./middlewares/auth.middleware');
 const sessionMiddleware = require('./middlewares/session.middleware');
@@ -26,6 +31,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESSION_SCRET));
 app.use(sessionMiddleware);
+// app.use(csrf({ cookie: true }))
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
