@@ -10,6 +10,7 @@ module.exports = {
     else if (page > this.totalPage) this.page = this.totalPage;
 
     this.drop = (this.page - 1) * this.perPage;
+    if(this.drop<0) this.drop = 0;
   },
   html() {
     this.startPage = this.page - Math.floor(this.limit / 2);

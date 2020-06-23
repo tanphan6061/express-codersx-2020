@@ -1,24 +1,18 @@
-const shortid = require("shortid");
-const db = require("../db");
 const User = require('../models/user.model');
+const db = require('../db');
 const Book = require('../models/book.model');
+const Transaction = require('../models/transaction.model');
 const pagination = require("../helper/pagination");
 
 module.exports.index = async function (req, res) {
   let page = req.query.page || 1;
-  let total = db
-    .get("transactions")
-    .filter({ idUser: res.locals.user.id })
-    .value().length;
+  let total = await Transaction.find({ idUser: res.locals.user.id }).count(true);
   pagination.init(page, total);
 
-  let transactions = db
-    .get("transactions")
-    .filter({ idUser: res.locals.user.id })
-    .drop(pagination.drop)
-    .take(pagination.perPage)
-    .cloneDeep()
-    .value();
+  let transactions = await Transaction.
+    find({ idUser: res.locals.user.id })
+    .limit(pagination.perPage)
+    .skip(pagination.drop);
 
   // transactions.map(async i => {
   //   i.user = await User.findById(i.idUser)
@@ -30,6 +24,7 @@ module.exports.index = async function (req, res) {
     i.user = await User.findById(i.idUser)
     i.book = await Book.findById(i.idBook)
   }
+
 
   res.render("transactions/index", {
     transactions,
@@ -43,26 +38,21 @@ module.exports.create = async function (req, res) {
   res.render("transactions/create", { users, books, csrf: req.csrfToken() });
 };
 
-module.exports.store = function (req, res) {
+module.exports.store = async function (req, res) {
   let { idUser, idBook, amount } = req.body;
   if (amount < 1)
     amount = 1;
-  db.get("transactions")
-    .push({ id: shortid.generate(), idUser, idBook, amount, isComplete: false })
-    .write();
+  await Transaction.create({ idUser, idBook, amount, isComplete: false })
   res.redirect("/transactions");
 };
 
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
   let id = req.params.id;
-  db.get("transactions")
-    .find({ id })
-    .assign({ isComplete: true })
-    .write();
+  await Transaction.findByIdAndUpdate(id, { isComplete: true });
   res.redirect("back");
 };
 
-module.exports.rentBook = function (req, res) {
+module.exports.rentBook = async function (req, res) {
   let sessionId = res.locals.cart.id;
 
   let cart = db
@@ -74,9 +64,12 @@ module.exports.rentBook = function (req, res) {
     .value().cart;
 
   for (idBook in cart) {
-    db.get("transactions")
-      .push({ id: shortid.generate(), idUser: res.locals.user.id, idBook, amount: cart[idBook], isComplete: false })
-      .write();
+    await Transaction.create({
+      idUser: res.locals.user.id,
+      idBook,
+      amount: cart[idBook],
+      isComplete: false
+    })
   }
 
   db.get('sessions')

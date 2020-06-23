@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MongoDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MongoDB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const authMiddleware = require('./middlewares/auth.middleware');
 const sessionMiddleware = require('./middlewares/session.middleware');
@@ -21,6 +21,7 @@ const transactionRoutes = require("./routes/transaction.route");
 const authRoutes = require("./routes/auth.route");
 const profileRoutes = require("./routes/profile.route");
 const cartRoutes = require("./routes/cart.route");
+const apiRoutes = require('./routes/api.route');
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -40,7 +41,7 @@ app.use("/transactions", authMiddleware.requireAuth, transactionRoutes);
 app.use("/auth", authRoutes);
 app.use('/profile', authMiddleware.requireAuth, profileRoutes);
 app.use('/cart', cartRoutes);
-
+app.use('/api', apiRoutes);
 
 // const bcrypt = require('bcrypt');
 // bcrypt.hash('123123',10,function(err,hash){
